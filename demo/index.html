@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FBF7EF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Calm Wedding">
+<title>Calm Wedding Planner · Her Midnight Edit</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBF7EF;--card:#FFFDF9;--text:#1B2036;--muted:#6E6A5E;--faint:#A39C8C;--line:#E8DFCE;--line2:#D8CCB4;--accent:#8A6F3A;--gold:#C9A464;--rose:#C97F8C;--navy:#121830;--ok:#5E7A50;--okbg:#E4EBDC;--warn:#A35F5A;--warnbg:#F5E2DF;--amb:#8C6E3C;--ambbg:#F5EDDA;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;--shadow:0 10px 24px -16px rgba(18,24,48,.35)}
+[data-theme=dark]{--bg:#0E1222;--card:#161B30;--text:#EEE8DC;--muted:#A9A290;--faint:#6F6A5E;--line:#262C45;--line2:#343B5A;--accent:#D4B172;--gold:#D4B172;--okbg:#22301F;--ok:#9BBE88;--warnbg:#3A2226;--warn:#E09A93;--ambbg:#3A3020;--amb:#E0BE7E;--shadow:0 10px 24px -16px rgba(0,0,0,.6)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;min-height:100vh;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+button,input,textarea,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;text-align:inherit}
+#main{max-width:640px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) 16px 20px}
+.top{display:flex;align-items:center;justify-content:space-between;margin:2px 0 14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:21px;font-weight:600}
+.brand i{width:34px;height:34px;border-radius:10px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-style:normal;font-size:17px}
+.brand small{display:block;font-family:var(--sans);font-size:9.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:-3px}
+.iconbtn{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);text-align:center}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-weight:500;font-size:34px;line-height:1.08;margin:4px 0}
+h1 em,h2 em{font-style:italic;color:var(--accent)}
+h2{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.2}
+.sub{color:var(--muted);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0;box-shadow:var(--shadow)}
+.card .head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+.link{font-size:13px;color:var(--accent);font-weight:500}
+.hint{color:var(--muted);font-size:13px}
+.row{display:flex;gap:12px;align-items:center}
+.hero{text-align:center;padding:26px 18px 22px;background:var(--navy);color:#F3ECDF;border:0;position:relative;overflow:hidden}
+.hero:before{content:'';position:absolute;inset:10px;border:1px solid rgba(201,164,100,.45);border-radius:14px;pointer-events:none}
+.hero .eyebrow{color:var(--gold)}
+.hero h1{color:#F3ECDF;font-size:38px;margin-top:6px}
+.hero h1 em{color:var(--gold)}
+.hero .days{font-family:var(--serif);font-size:64px;line-height:1;color:var(--gold);margin-top:10px}
+.hero .days small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#cfc6b4;margin-top:6px}
+.hero p{color:#cfc6b4;font-size:13.5px;margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.stat b{display:block;font-family:var(--serif);font-weight:600;font-size:25px;line-height:1.05}
+.stat span{font-size:11px;color:var(--muted)}
+.stat.red b{color:var(--warn)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0 4px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:99px}
+.bar.over i{background:var(--warn)}
+.item{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);width:100%}
+.item:last-child{border-bottom:0}
+.item .t{flex:1;min-width:0}
+.item .t b{display:block;font-weight:600;font-size:15px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .t small{display:block;color:var(--muted);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .r{text-align:right;flex:none;font-size:14px;font-weight:600}
+.item .r small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.check{flex:none;width:26px;height:26px;border-radius:8px;border:1.6px solid var(--line2);display:grid;place-items:center;color:#fff;font-size:15px;line-height:1;text-align:center}
+.check.on{background:var(--gold);border-color:var(--gold)}
+.done b{text-decoration:line-through;color:var(--faint)}
+.av{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:13px;color:#fff;background:var(--c,#6f9cc4)}
+.tag{flex:none;white-space:nowrap;display:inline-block;font-size:11px;line-height:1.5;padding:2px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--muted)}
+.tag.yes{background:var(--okbg);border-color:transparent;color:var(--ok)}
+.tag.no{background:var(--warnbg);border-color:transparent;color:var(--warn)}
+.tag.soon{background:var(--ambbg);border-color:transparent;color:var(--amb)}
+.tag.late{background:var(--warnbg);border-color:transparent;color:var(--warn)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
+.chip{font-size:12.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--line2);background:var(--card);white-space:nowrap}
+.chip.on{background:var(--navy);color:#F7F1E6;border-color:var(--navy)}
+[data-theme=dark] .chip.on{background:var(--gold);color:#111;border-color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:14px;font-weight:600;font-size:14px;border:1px solid var(--line2);background:var(--card);text-align:center}
+.btn.primary{background:var(--navy);color:#F7F1E6;border-color:var(--navy)}
+[data-theme=dark] .btn.primary{background:var(--gold);color:#111;border-color:var(--gold)}
+.btn.small{padding:8px 12px;font-size:13px;border-radius:11px}
+.btn.wide{width:100%}
+.btn.danger{color:var(--warn)}
+.field{display:block;margin:12px 0}
+.field>span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
+.in{width:100%;padding:12px 14px;border-radius:13px;border:1px solid var(--line2);background:var(--bg);outline:none}
+.in:focus{border-color:var(--gold)}
+textarea.in{min-height:90px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.two .field{margin:6px 0}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{flex:1;min-width:70px;padding:10px 6px;border-radius:12px;border:1px solid var(--line2);font-size:13px;background:var(--bg);text-align:center}
+.seg button.on{background:var(--navy);color:#F7F1E6;border-color:var(--navy)}
+[data-theme=dark] .seg button.on{background:var(--gold);color:#111;border-color:var(--gold)}
+.nav{position:fixed;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:center;gap:4px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:20}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10.5px;color:var(--faint);padding:6px 10px;border-radius:12px;min-width:62px}
+.nav button svg{width:22px;height:22px}
+.nav button.on{color:var(--accent)}
+.list-kv div{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.list-kv div:last-child{border-bottom:0}
+.empty{text-align:center;padding:22px 10px;color:var(--muted)}
+.empty b{display:block;font-family:var(--serif);font-size:22px;color:var(--text);font-weight:500;margin-bottom:4px}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--navy);color:#F7F1E6;padding:10px 16px;border-radius:12px;font-size:13.5px;z-index:50;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+.demo-bar{background:color-mix(in srgb,var(--gold) 16%,var(--bg));border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);text-align:center;font-size:13px;padding:10px 14px;border-radius:14px;margin:0 0 12px}
+.demo-bar a{color:var(--accent);font-weight:600}
+.grp{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:16px 0 2px}
+.grp:first-child{margin-top:2px}
+.menu .item{padding:14px 0}
+.menu .item .ic{width:40px;height:40px;border-radius:12px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;font-size:18px;flex:none}
+.tables{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.table{border:1px solid var(--line);border-radius:16px;padding:12px;background:var(--bg)}
+.table b{font-family:var(--serif);font-size:19px;font-weight:600}
+.table ul{list-style:none;margin-top:6px;font-size:13px}
+.table li{padding:3px 0;border-bottom:1px dashed var(--line)}
+.table li.free{color:var(--faint)}
+.tl{display:grid;grid-template-columns:82px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);width:100%}
+.tl:last-child{border-bottom:0}
+.tl .time{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--accent)}
+.tl small{display:block;color:var(--muted);font-size:12.5px}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+.fab{position:fixed;right:max(18px,calc(50% - 300px));bottom:calc(92px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:18px;background:var(--navy);color:#F7F1E6;font-size:28px;line-height:1;display:grid;place-items:center;text-align:center;box-shadow:0 14px 24px -10px rgba(18,24,48,.6);z-index:15}
+[data-theme=dark] .fab{background:var(--gold);color:#111}
+.table.pick{border-color:var(--gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 45%,transparent)}
+.table li.sel,.item.sel{background:color-mix(in srgb,var(--gold) 18%,transparent);border-radius:8px}
+.table .th{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.selbar{position:sticky;top:8px;z-index:5;background:var(--navy);color:#F7F1E6;border-radius:14px;padding:10px 14px;font-size:13.5px;display:flex;gap:10px;align-items:center;justify-content:space-between;margin:10px 0}
+[data-theme=dark] .selbar{background:var(--gold);color:#111}
+.selbar button{color:inherit;text-decoration:underline;font-size:13px}
+.focus{text-align:center;padding:6px 0 2px}
+.focus .big{font-family:var(--serif);font-size:26px;line-height:1.15;margin:6px 0 4px}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.photos div{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--line)}
+.photos img{width:100%;height:100%;object-fit:cover;display:block}
+.photos button{position:absolute;top:5px;right:5px;width:26px;height:26px;border-radius:50%;background:rgba(18,24,48,.7);color:#fff;font-size:15px;line-height:1;display:grid;place-items:center}
+.photos .add{display:grid;place-items:center;border:1.5px dashed var(--line2);background:var(--bg);color:var(--muted);font-size:13px;text-align:center;cursor:pointer}
+.swatches{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.swatches button.sw{width:52px;height:52px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line2)}
+.swatches input[type=color]{width:52px;height:52px;border:1.5px dashed var(--line2);border-radius:50%;background:var(--bg);padding:6px;cursor:pointer;-webkit-appearance:none;appearance:none}
+.swatches input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+.swatches input[type=color]::-webkit-color-swatch{border:0;border-radius:50%}
+.swatches input[type=color]::-moz-color-swatch{border:0;border-radius:50%}
+.qs label{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.qs label:last-child{border-bottom:0}
+.qs input{width:18px;height:18px;margin-top:2px;flex:none}
+#print{display:none}
+@media print{
+  body{background:#fff;padding:0;color:#111}
+  body>*:not(#print){display:none!important}
+  #print{display:block;font-family:Inter,system-ui,sans-serif;font-size:11pt;color:#111}
+  #print h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:30pt;font-weight:500;margin:0 0 4pt}
+  #print h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:17pt;font-weight:600;margin:14pt 0 4pt}
+  #print .pb{font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:#8a6f3a;margin-bottom:6pt}
+  #print table{width:100%;border-collapse:collapse;margin-top:8pt}
+  #print th,#print td{text-align:left;padding:5pt 6pt;border-bottom:1px solid #ddd;vertical-align:top}
+  #print th{font-size:8.5pt;letter-spacing:.08em;text-transform:uppercase;color:#666}
+  #print .cards{display:grid;grid-template-columns:1fr 1fr;gap:14pt}
+  #print .tc{border:1.5px solid #c9a464;border-radius:10pt;padding:22pt 16pt;text-align:center;break-inside:avoid;min-height:210pt}
+  #print .tc b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:34pt;font-weight:500;margin-bottom:8pt}
+  #print .cols{columns:2;column-gap:24pt}
+  #print .cols div{break-inside:avoid;padding:3pt 0;border-bottom:1px dotted #ccc;display:flex;justify-content:space-between;gap:10pt}
+  #print .box{display:inline-block;width:10pt;height:10pt;border:1px solid #888;margin-right:6pt;vertical-align:-1pt}
+}
+</style>
+</head>
+<body>
+<div id="main"></div>
+<nav class="nav" id="nav"></nav>
+<div id="print"></div>
+<input type="file" id="file" accept=".json,.csv,application/json,text/csv" style="display:none">
+<input type="file" id="photo" accept="image/*" multiple style="display:none">
+<script>
+/* Calm Wedding Planner: web app by Her Midnight Edit. Everything is saved in this browser only (localStorage). */
+var KEY='calmWedding.v1';
+var store=null; try{ store=window.localStorage; store.setItem('__cw','1'); store.removeItem('__cw'); }catch(e){ store=null; }
+
+/* ---------- demo ---------- */
+var DEMO_MODE=true;             // true = free demo build (sample wedding, nothing saved)
+var FULL_VERSION_LINK='https://www.etsy.com/shop/HerMidnightEdit';   // your Etsy listing link, shown in demo mode
+
+var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var COLORS=['#6f9cc4','#6f9a7e','#8c84bd','#d9896a','#c97f8c','#8a6f3a','#4f6d8f','#7b8fb0'];
+var CURRENCIES=[['USD','$ US dollar'],['CAD','$ Canadian dollar'],['AUD','$ Australian dollar'],['GBP','£ British pound'],['EUR','€ Euro'],['NZD','$ NZ dollar']];
+var CATS=[['Venue',15],['Catering',25],['Photography',10],['Videography',5],['Attire',6],['Hair & makeup',3],['Flowers & decor',8],['Entertainment',4],['Ceremony',2],['Stationery',3],['Cake & desserts',3],['Rings',4],['Transport',2],['Favors & gifts',3],['Contingency',5],['Other',2]];
+var GROUPS=['Family','Friends','Work','Neighbors','Plus ones','Children'], MEALS=['Chicken','Beef','Fish','Vegetarian','Vegan','Kids’ meal'];
+var TASKS=[[365,['Set your budget','Draft the guest list','Choose your date','Book the venue','Decide if you want a planner']],[300,['Book the photographer','Book the videographer','Book the caterer','Choose your wedding party','Start a wedding website']],
+  [240,['Book the officiant','Shop for wedding outfits','Send save-the-dates','Reserve hotel rooms for guests','Book entertainment']],[180,['Book the florist','Order the cake','Book hair & makeup','Plan the honeymoon','Book transport','Order invitations']],
+  [120,['Buy the wedding rings','Book the menu tasting','Plan the rehearsal dinner','Buy wedding party gifts','Choose favors']],[90,['Finalize the menu','First outfit fitting','Write your vows','Confirm ceremony details']],
+  [60,['Send invitations','Hair & makeup trial','Buy accessories','Plan the order of the day']],[30,['RSVP deadline','Final guest count to the caterer','Finish the seating plan','Final outfit fitting','Get the marriage license','Write the wedding-day timeline']],
+  [14,['Confirm every vendor','Pay final balances','Pack for the honeymoon','Break in your shoes']],[7,['Share the timeline with vendors and wedding party','Prepare tip envelopes','Pack the wedding-day bag']],[1,['Rehearsal','Rest, eat well, drink water','Charge your phone and camera']],[-14,['Send thank-you cards','Return rentals','Leave reviews for your vendors']]];
+var TIMELINE=[['9:00 AM','Hair & makeup begins'],['11:30 AM','Photographer arrives'],['12:30 PM','Getting dressed'],['1:00 PM','First look & couple photos'],['2:30 PM','Guests arrive'],['3:00 PM','Ceremony begins'],['3:30 PM','Family & group photos'],['4:00 PM','Welcome reception'],['5:30 PM','Guests take their seats'],['5:45 PM','Grand entrance'],['6:00 PM','Dinner is served'],['7:30 PM','Speeches'],['8:00 PM','Cake cutting'],['8:30 PM','Dessert & tea'],['10:30 PM','Send-off']];
+
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function pad(n){ return (n<10?'0':'')+n; }
+function iso(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function today(){ return iso(new Date()); }
+function parseD(s){ var p=String(s||'').split('-'); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null; }
+function fmtDate(s,long){ var d=parseD(s); if(!d) return ''; return long?['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.getDay()]+', '+MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear():MON[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear(); }
+function daysUntil(s){ var d=parseD(s); if(!d) return null; var t=parseD(today()); return Math.round((d-t)/864e5); }
+function money(n,dec){ try{ return new Intl.NumberFormat('en-US',{style:'currency',currency:S.cur||'USD',maximumFractionDigits:dec?2:0,minimumFractionDigits:dec?2:0}).format(+n||0); }catch(e){ return '$'+Math.round(+n||0); } }
+function num(v){ v=parseFloat(String(v||'').replace(/[^0-9.\-]/g,'')); return isNaN(v)?0:v; }
+function initials(n){ var p=String(n||'?').trim().split(/\s+/); return ((p[0]||'?')[0]+(p.length>1?p[p.length-1][0]:'')).toUpperCase(); }
+function hash(s){ var h=0; s=String(s||''); for(var i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))|0; return Math.abs(h); }
+
+var PACK=['Wedding rings','Vows or speech notes','Marriage license','Printed wedding-day timeline','Vendor phone numbers','Tip envelopes','Emergency cash','Phone charger','Tissues','Safety pins','Mini sewing kit','Stain remover pen','Pain relievers','Bandages and blister pads','Deodorant','Hairbrush and hair pins','Makeup for touch-ups','Lip balm','Breath mints','Water and snacks','Comfortable shoes','Umbrella'];
+var VQ={
+  'Venue':['How many guests can it hold?','What is included: tables, chairs, linens?','Is there a rain plan?','When can we set up, and when must we leave?','Can we bring our own caterer?','What is the deposit and payment schedule?'],
+  'Catering':['What is the price per guest?','Can you handle dietary needs and allergies?','Is a tasting included?','Are staff, plates and cutlery included?','When do you need the final guest count?'],
+  'Photography':['How many hours are included?','How many edited photos will we get, and when?','Is a second photographer included?','Can we see a full wedding gallery?','What happens if you are ill on the day?'],
+  'Videography':['How long is the final film?','Will we get the raw footage?','When will we get the video?'],
+  'Flowers & decor':['Can you work with our budget?','Do you deliver and set up?','Can ceremony flowers move to the reception?','What is in season on our date?'],
+  'Hair & makeup':['Is a trial included?','How many people can you do, and how long each?','Do you come to us? Is there a travel fee?'],
+  'Cake & desserts':['Is a tasting included?','How many servings do we need?','Are delivery and setup included?','Can you make allergy-friendly options?'],
+  'Entertainment':['How long do you perform?','What space or equipment do you need?','Can we see a recent performance?'],
+  'Transport':['How many people fit in each car?','How long is the booking?','What happens if you run late?'],
+  'Stationery':['How long does printing take?','Can we see a proof first?','Is addressing included?'],
+  'Attire':['When should we order?','How many fittings are included?','Are alterations included in the price?']};
+var BOARD_DEMO=['1717785386175-dfeb8237a4e7','1575119437835-e574de972888','1613067532295-b4f1760616cd','1664853021355-6a5d73f6198f','1600287648597-d81be16a5a16','1640060902291-570e6cdb00e0'].map(function(i){ return 'https://images.unsplash.com/photo-'+i+'?w=420&h=420&fit=crop&q=70'; }); // free Unsplash photos, demo only
+var VQ_ANY=['What is included in the price?','What is the deposit, and when is the balance due?','What is your cancellation policy?','Can we see reviews or past work?'];
+function seedTasks(){ var t=[], i=0; TASKS.forEach(function(g){ g[1].forEach(function(n){ t.push({id:'tk'+(i++),name:n,days:g[0],done:false,notes:''}); }); }); return t; }
+function seedTimeline(){ return TIMELINE.map(function(r,i){ return {id:'tl'+i,time:r[0],what:r[1],who:'',where:''}; }); }
+function seedPack(){ return PACK.map(function(n,i){ return {id:'pk'+i,name:n,done:false}; }); }
+function blank(){ return normalize({v:1,p1:'',p2:'',date:'',venue:'',budget:0,cur:'USD',theme:'light',cats:CATS.map(function(c){return {name:c[0],pct:c[1]};}),items:[],guests:[],tasks:seedTasks(),vendors:[],tables:[],timeline:seedTimeline(),guestGoal:0}); }
+function normalize(d){ d.board=d.board||{photos:[],colors:[],notes:''}; d.board.photos=d.board.photos||[]; d.board.colors=d.board.colors||[]; d.party=d.party||[]; d.pack=d.pack||seedPack(); d.gone=d.gone||{}; ['items','guests','tasks','vendors','tables','timeline'].forEach(function(k){ d[k]=d[k]||[]; }); return d; }
+function load(){ try{ var raw=store&&store.getItem(KEY); if(raw){ var d=JSON.parse(raw); if(d&&d.tasks) return normalize(d); } }catch(e){} return blank(); }
+var S=DEMO_MODE?sampleData():load();
+function save(){ if(DEMO_MODE) return; try{ store&&store.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Could not save. Is your storage full?'); } }
+
+function sampleData(){
+  var d=blank(), w=new Date(); w.setMonth(w.getMonth()+7); w.setDate(14); while(w.getDay()!==6) w.setDate(w.getDate()+1);
+  d.p1='Maya'; d.p2='Adam'; d.date=iso(w); d.venue='The Garden House'; d.budget=25000; d.guestGoal=90;
+  var left=daysUntil(d.date); d.tasks.forEach(function(t){ if(t.days>left+20) t.done=true; }); d.tasks[5].done=false;
+  function it(n,c,e,a,p,due){ return {id:uid(),name:n,cat:c,est:e,act:a,paid:p,due:due||'',vendor:''}; }
+  function dd(m){ var x=new Date(); x.setDate(x.getDate()+m); return iso(x); }
+  d.items=[it('Venue hire','Venue',3800,3900,1500,dd(40)),it('Dinner for 90','Catering',6200,6000,1200,dd(150)),it('Photographer, full day','Photography',2500,2400,800,dd(12)),it('Wedding dress','Attire',1400,1250,1250),it('Suit','Attire',500,0,0),
+    it('Flowers & centerpieces','Flowers & decor',1800,1950,500,dd(20)),it('Invitations & save-the-dates','Stationery',600,540,540),it('Wedding cake','Cake & desserts',650,0,0,dd(160)),it('Rings','Rings',1100,1100,1100),it('Hair & makeup','Hair & makeup',650,0,150,dd(5)),it('Car','Transport',400,0,0)];
+  var names=['Sara Ahmed','Omar Ahmed','Lina Ahmed','Yusuf Khan','Aisha Khan','Hannah Lee','Daniel Lee','Emily Carter','James Carter','Olivia Brown','Noah Brown','Grace Miller','Leo Miller','Zara Ali','Adam’s grandma Ruth','Ben Turner','Chloe Turner','Ella Wright','Sam Wright','Mia Scott','Jack Scott','Nora Hill','Ali Hassan','Huda Hassan','Ryan Green','Amelia Green','Kai Patel','Priya Patel','Lucas Young','Isla Young','Ethan Clark','Sofia Clark'];
+  d.tables=[{id:uid(),name:'Table 1',seats:8},{id:uid(),name:'Table 2',seats:8},{id:uid(),name:'Table 3',seats:8},{id:uid(),name:'Table 4',seats:8}];
+  d.guests=names.map(function(n,i){ var rs=i<19?'Yes':(i<23?'No':'Pending'); return {id:uid(),name:n,group:GROUPS[i%4],side:i%2?'Adam':'Maya',std:true,inv:i<26,rsvp:rs,meal:rs==='Yes'?MEALS[i%5]:'',table:rs==='Yes'&&i<16?d.tables[Math.floor(i/4)].id:'',plus:false,phone:'',email:'',gift:i<3?'Gift card':'',thanks:false,notes:''}; });
+  d.vendors=[{id:uid(),name:'The Garden House',cat:'Venue',contact:'Ruby',phone:'(512) 555-0142',email:'events@example.com',quote:3900,booked:true,notes:'Deposit paid, final balance 4 weeks before.'},{id:uid(),name:'Golden Hour Photo',cat:'Photography',contact:'Liam',phone:'(512) 555-0187',email:'hello@example.com',quote:2400,booked:true,notes:''},
+    {id:uid(),name:'Petal & Stem',cat:'Flowers & decor',contact:'Ivy',phone:'(512) 555-0110',email:'',quote:1950,booked:true,notes:''},{id:uid(),name:'Sweet Layers Bakery',cat:'Cake & desserts',contact:'',phone:'(512) 555-0123',email:'',quote:650,booked:false,notes:'Tasting on Saturday 11 AM'},{id:uid(),name:'Bloom Bakes',cat:'Cake & desserts',contact:'',phone:'(512) 555-0199',email:'',quote:720,booked:false,notes:''}];
+  d.timeline[0].who='Bride, mothers'; d.timeline[5].where='Garden lawn'; d.timeline[10].where='Main hall';
+  d.items.forEach(function(x,i){ x.paidby=i===1?'Maya’s family':i===0?'Adam’s family':'Us'; });
+  d.guests[2].diet='Nut allergy'; d.guests[7].diet='Gluten free'; d.guests[11].diet='Vegetarian'; d.guests[4].child=true;
+  d.vendors[0].asked=VQ['Venue'].slice(0,4); d.vendors[1].asked=VQ['Photography'].slice(0,3);
+  d.party=[{id:uid(),name:'Sara Ahmed',role:'Maid of honor',phone:'(512) 555-0161',email:'',outfit:'Sage dress, size 8',jobs:'Hold the rings until the ceremony. Keep the wedding-day bag.'},{id:uid(),name:'Yusuf Khan',role:'Best man',phone:'(512) 555-0175',email:'',outfit:'Navy suit',jobs:'Welcome speech. Hand out tip envelopes.'},{id:uid(),name:'Hannah Lee',role:'Bridesmaid',phone:'',email:'',outfit:'Sage dress, size 6',jobs:'Guest book table'},{id:uid(),name:'Omar Ahmed',role:'Usher',phone:'',email:'',outfit:'Navy suit',jobs:'Show guests to their seats'}];
+  d.pack.forEach(function(p,i){ p.done=i<7; });
+  d.board.colors=['#E9D8C4','#A8B5A2','#6F8466','#F4EDE4','#C9A464','#1B2036']; d.board.notes='Garden party feel. Sage, ivory and soft gold.\nLots of greenery and white roses. Candles on every table.\nLong tables in the hall, fairy lights outside.';
+  d.board.photos=BOARD_DEMO.map(function(u,i){ return {id:'bd'+i,src:u}; });
+  return d;
+}
+
+/* ---------- helpers ---------- */
+function toast(t){ var el=document.createElement('div'); el.className='toast'; el.textContent=t; document.body.appendChild(el); setTimeout(function(){ el.remove(); },2600); }
+function find(coll,id){ var a=S[coll]; for(var i=0;i<a.length;i++) if(a[i].id===id) return a[i]; return null; }
+function names(){ var a=S.p1||'Partner 1', b=S.p2||'Partner 2'; return S.p1||S.p2?esc(a)+' <em>&amp;</em> '+esc(b):'Your <em>wedding</em>'; }
+function taskDue(t){ if(!S.date) return ''; var d=parseD(S.date); d.setDate(d.getDate()-t.days); return iso(d); }
+function taskState(t){ if(t.done) return 'done'; var due=taskDue(t); if(!due) return 'later'; var n=daysUntil(due); return n<0?'late':(n<=30?'soon':'later'); }
+function sum(a,k){ return a.reduce(function(s,x){ return s+num(x[k]); },0); }
+function catPlan(c){ return Math.round((S.budget||0)*(+c.pct||0)/100); }
+function guestStats(){ var g=S.guests, yes=g.filter(function(x){return x.rsvp==='Yes';}), plus=yes.filter(function(x){return x.plus;}).length; return {all:g.length,yes:yes.length+plus,no:g.filter(function(x){return x.rsvp==='No';}).length,pend:g.filter(function(x){return x.rsvp==='Pending';}).length,inv:g.filter(function(x){return x.inv;}).length,thanks:g.filter(function(x){return x.gift&&!x.thanks;}).length}; }
+function icon(n){ var p={home:'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z',check:'M4 6h16M4 12h10M4 18h7M17 15l2 2 4-4',guests:'M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 19v-1a4 4 0 0 0-3-3.9M16 2.1a4 4 0 0 1 0 7.8',budget:'M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6',more:'M5 12h.01M12 12h.01M19 12h.01'}[n];
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="'+p+'"/></svg>'; }
+
+/* ---------- forms (one builder for every list) ---------- */
+var FORMS={
+  guests:{one:'guest',title:'Guest',fields:[['name','Name','text'],['group','Group','sel:groups'],['side','Side','seg:sides'],['rsvp','RSVP','seg:Pending|Yes|No'],['meal','Meal choice','sel:meals'],['diet','Dietary needs or allergies','text'],['table','Table','sel:tables'],['plus','Bringing a plus one','check'],['child','Child','check'],['std','Save-the-date sent','check'],['inv','Invitation sent','check'],['phone','Phone','text'],['email','Email','text'],['address','Mailing address (for invitations)','area'],['gift','Gift received','text'],['thanks','Thank-you card sent','check'],['notes','Notes','area']]},
+  items:{one:'cost',title:'Cost',fields:[['name','What is it?','text'],['cat','Budget category','sel:cats'],['est','Estimated','money'],['act','Actual cost','money'],['paid','Paid so far','money'],['due','Next payment due','date'],['paidby','Who is paying','sel:payers'],['vendor','Vendor','text']]},
+  party:{one:'person',title:'Person',fields:[['name','Name','text'],['role','Role','text'],['phone','Phone','text'],['email','Email','text'],['outfit','Outfit and sizes','text'],['jobs','Their jobs on the day','area']]},
+  pack:{one:'item',title:'Item',fields:[['name','Item','text'],['done','Packed','check']]},
+  vendors:{one:'vendor',title:'Vendor',fields:[['name','Vendor name','text'],['cat','Category','sel:cats'],['contact','Contact person','text'],['phone','Phone','text'],['email','Email','text'],['quote','Quote','money'],['booked','Booked','check'],['notes','Notes','area']]},
+  tasks:{one:'task',title:'Task',fields:[['name','Task','text'],['days','Days before the wedding','number'],['done','Done','check'],['notes','Notes','area']]},
+  tables:{one:'table',title:'Table',fields:[['name','Table name','text'],['seats','Seats','number']]},
+  timeline:{one:'moment',title:'Moment',fields:[['time','Time','text'],['what','What happens','text'],['where','Where','text'],['who','Who','text']]}
+};
+function opts(k){ if(k==='groups') return GROUPS; if(k==='meals') return MEALS; if(k==='cats') return S.cats.map(function(c){return c.name;}); if(k==='sides') return [S.p1||'Partner 1',S.p2||'Partner 2','Both']; if(k==='payers') return payers();
+  if(k==='tables') return [['','Not seated']].concat(S.tables.map(function(t){return [t.id,t.name];})); return k.split('|'); }
+function vForm(){
+  var F=FORMS[V.coll], d=V.draft, isNew=!find(V.coll,d.id);
+  var h='<button class="link" data-act="back">‹ Back</button><div class="eyebrow" style="margin-top:8px">'+(isNew?'New '+F.one:'Edit '+F.one)+'</div><h1>'+(isNew?'Add a <em>'+F.one+'</em>':'Edit <em>'+F.one+'</em>')+'</h1><div class="card">';
+  F.fields.forEach(function(f){ var k=f[0], lab=f[1], ty=f[2], v=d[k]==null?'':d[k];
+    if(ty==='check') h+='<label class="row" style="gap:10px;margin:12px 0"><input type="checkbox" data-k="'+k+'"'+(v?' checked':'')+' style="width:20px;height:20px"> '+esc(lab)+'</label>';
+    else if(ty==='area') h+='<label class="field"><span>'+esc(lab)+'</span><textarea class="in" data-k="'+k+'">'+esc(v)+'</textarea></label>';
+    else if(ty.indexOf('sel:')===0){ var o=opts(ty.slice(4)); h+='<label class="field"><span>'+esc(lab)+'</span><select class="in" data-k="'+k+'">'+(typeof o[0]==='string'?['<option value="">Choose…</option>']:[]).concat(o.map(function(x){ var val=typeof x==='string'?x:x[0], txt=typeof x==='string'?x:x[1]; return '<option value="'+esc(val)+'"'+(String(v)===String(val)?' selected':'')+'>'+esc(txt)+'</option>'; })).join('')+'</select></label>'; }
+    else if(ty.indexOf('seg:')===0){ h+='<div class="field"><span>'+esc(lab)+'</span><div class="seg">'+opts(ty.slice(4)).map(function(x){ return '<button data-act="seg" data-k="'+k+'" data-v="'+esc(x)+'" class="'+(v===x?'on':'')+'">'+esc(x)+'</button>'; }).join('')+'</div></div>'; }
+    else h+='<label class="field"><span>'+esc(lab)+'</span><input class="in" data-k="'+k+'" value="'+esc(v)+'"'+(ty==='date'?' type="date"':'')+(ty==='money'||ty==='number'?' inputmode="decimal"':'')+(ty==='money'?' placeholder="0"':'')+'></label>';
+  });
+  if(V.coll==='vendors'){ var qs=(VQ[d.cat]||[]).concat(VQ_ANY), asked=d.asked||[];
+    h+='<div class="field"><span>Questions to ask'+(d.cat?' · '+esc(d.cat):'')+'</span><div class="qs">'+qs.map(function(q){ return '<label><input type="checkbox" data-act="askq" data-q="'+esc(q)+'"'+(asked.indexOf(q)>=0?' checked':'')+'> '+esc(q)+'</label>'; }).join('')+'</div><p class="hint" style="margin-top:6px">Tick each one once you have the answer. Write the answers in Notes.</p></div>';
+    if(!d.booked) h+='<p class="hint" style="margin:6px 0 12px">Tick “Booked” and the quote goes into your budget by itself.</p>'; }
+  h+='<button class="btn primary wide" data-act="saveform">'+(isNew?'Add '+F.one:'Save changes')+'</button>';
+  if(!isNew) h+='<button class="btn wide danger" style="margin-top:10px" data-act="delform">Delete this '+F.one+'</button>';
+  return h+'</div>';
+}
+
+/* ---------- views ---------- */
+var V={view:'home',coll:'',draft:null,back:'home',gf:'all',q:'',tf:'open'};
+function go(v){ V.view=v; render(); window.scrollTo(0,0); }
+function openForm(coll,id,preset){ V.back=V.view; V.coll=coll; var x=id?find(coll,id):null; V.draft=x?JSON.parse(JSON.stringify(x)):Object.assign({id:uid()},preset||{}); V.view='form'; render(); window.scrollTo(0,0); }
+function topbar(){ return '<div class="top"><div class="brand"><i>♡</i><div>Calm Wedding<small>Wedding planner</small></div></div><button class="iconbtn" data-act="theme" aria-label="Light or dark">'+(S.theme==='dark'?'☀':'☾')+'</button></div>'; }
+function demoBar(){ if(!DEMO_MODE) return ''; return '<div class="demo-bar">Free demo with a sample wedding. Nothing is saved.'+(FULL_VERSION_LINK?' <a href="'+esc(FULL_VERSION_LINK)+'" target="_blank" rel="noopener">Get the full app</a>':'')+'</div>'; }
+
+function vHome(){
+  var h='', left=daysUntil(S.date), gs=guestStats(), spent=sum(S.items,'act')||0, est=sum(S.items,'est'), paid=sum(S.items,'paid'), cost=S.items.reduce(function(s,x){return s+(num(x.act)||num(x.est));},0);
+  h+='<div class="card hero"><div class="eyebrow">'+(S.date?fmtDate(S.date,true):'Our wedding')+'</div><h1>'+names()+'</h1>';
+  if(left!==null) h+='<div class="days">'+(left>0?left:left===0?'Today':'♡')+'<small>'+(left>1?'days to go':left===1?'day to go':left===0?'is the day!':'Married!')+'</small></div>';
+  else h+='<p>Add your names, date and budget to begin.</p><div style="margin-top:12px"><button class="btn small" data-act="go" data-v="settings" style="background:var(--gold);color:#111;border-color:var(--gold)">Set up our wedding</button></div>';
+  if(S.venue) h+='<p>'+esc(S.venue)+'</p>';
+  h+='</div>';
+  var over=S.budget&&cost>S.budget;
+  h+='<div class="card"><div class="head"><h2>Budget</h2><button class="link" data-act="go" data-v="budget">Open</button></div>'
+    +(S.budget?'<div class="bar'+(over?' over':'')+'"><i style="width:'+Math.min(100,cost/S.budget*100)+'%"></i></div><p class="hint">'+money(cost)+' of '+money(S.budget)+(over?' · '+money(cost-S.budget)+' over':' · '+money(S.budget-cost)+' left')+'</p>':'<p class="hint">Set your total budget in Settings.</p>')
+    +'<div class="stats" style="margin-top:12px"><div class="stat"><b>'+money(paid)+'</b><span>paid</span></div><div class="stat"><b>'+money(Math.max(0,cost-paid))+'</b><span>still to pay</span></div><div class="stat'+(over?' red':'')+'"><b>'+(S.budget?Math.round(cost/S.budget*100)+'%':'–')+'</b><span>of budget</span></div></div></div>';
+  h+='<div class="card"><div class="head"><h2>Guests</h2><button class="link" data-act="go" data-v="guests">Open</button></div><div class="stats"><div class="stat"><b>'+gs.all+'</b><span>invited</span></div><div class="stat"><b>'+gs.yes+'</b><span>attending</span></div><div class="stat"><b>'+gs.pend+'</b><span>waiting</span></div></div>'+(gs.thanks?'<p class="hint" style="margin-top:10px">'+gs.thanks+' thank-you '+(gs.thanks===1?'card':'cards')+' to send</p>':'')+'</div>';
+  var open=S.tasks.filter(function(t){return !t.done;}).sort(function(a,b){return b.days-a.days;}), done=S.tasks.length-open.length;
+  var skip=V.skip||[], q2=open.filter(function(t){ return skip.indexOf(t.id)<0; }); if(!q2.length) q2=open; var nx=q2[0];
+  h+='<div class="card"><div class="head"><h2>Just the <em>next step</em></h2><button class="link" data-act="go" data-v="tasks">All tasks</button></div><div class="bar"><i style="width:'+(S.tasks.length?done/S.tasks.length*100:0)+'%"></i></div><p class="hint">'+done+' of '+S.tasks.length+' tasks done'+(S.date?' · '+onTrack():'')+'</p>';
+  if(nx){ var due=taskDue(nx); h+='<div class="focus"><div class="big">'+esc(nx.name)+'</div><p class="hint">'+(due?(taskState(nx)==='late'?'From earlier. Whenever you can.':'Best done by '+fmtDate(due)):'Set your wedding date for due dates')+'</p><div class="row" style="justify-content:center;margin-top:12px"><button class="btn primary small" data-act="tick" data-id="'+nx.id+'">✓ Done</button><button class="btn small" data-act="notnow" data-id="'+nx.id+'">Not now</button></div></div>'
+    +(q2.length>1?'<p class="hint" style="margin-top:12px">Then: '+q2.slice(1,3).map(function(t){return esc(t.name);}).join(' · ')+'</p>':''); }
+  else h+='<div class="empty"><b>Everything is done</b>Enjoy your day. You did it.</div>';
+  h+='</div>';
+  var dueSoon=S.items.filter(function(x){ return x.due&&num(x.paid)<(num(x.act)||num(x.est)); }).sort(function(a,b){return a.due.localeCompare(b.due);}).slice(0,3);
+  if(dueSoon.length) h+='<div class="card"><div class="head"><h2>Payments <em>due</em></h2><button class="link" data-act="go" data-v="budget">Budget</button></div>'+dueSoon.map(function(x){ var n=daysUntil(x.due); return '<button class="item" data-act="edit" data-c="items" data-id="'+x.id+'"><div class="t"><b>'+esc(x.name)+'</b><small>'+fmtDate(x.due)+'</small></div><div class="r">'+money((num(x.act)||num(x.est))-num(x.paid))+'<small><span class="tag '+(n<0?'late':n<=14?'soon':'')+'">'+(n<0?'overdue':n===0?'today':'in '+n+' days')+'</span></small></div></button>'; }).join('')+'</div>';
+  return h;
+}
+function onTrack(){ var late=S.tasks.filter(function(t){ return taskState(t)==='late'; }).length; return late?late+' to catch up, no stress':'You’re on track ♡'; }
+function payers(){ return ['Us',(S.p1||'Partner 1')+'’s family',(S.p2||'Partner 2')+'’s family','Other']; }
+function itemCost(x){ return num(x.act)||num(x.est); }
+function plain(){ return (S.p1||S.p2)?(S.p1||'')+' & '+(S.p2||''):'Our wedding'; }
+function taskRow(t){ var st=taskState(t), due=taskDue(t), n=due?daysUntil(due):null;
+  return '<div class="item'+(t.done?' done':'')+'"><button class="check'+(t.done?' on':'')+'" data-act="tick" data-id="'+t.id+'" aria-label="Done">'+(t.done?'✓':'')+'</button><button class="t" data-act="edit" data-c="tasks" data-id="'+t.id+'"><b>'+esc(t.name)+'</b><small>'+(due?fmtDate(due):'Set your wedding date for due dates')+'</small></button>'+(st==='late'?'<span class="tag soon">Catch up</span>':st==='soon'?'<span class="tag soon">'+(n===0?'Today':'In '+n+' days')+'</span>':'')+'</div>'; }
+
+function vTasks(){
+  var f=V.tf, list=S.tasks.slice().sort(function(a,b){return b.days-a.days;});
+  if(f==='open') list=list.filter(function(t){return !t.done;}); else if(f==='done') list=list.filter(function(t){return t.done;}); else if(f==='late') list=list.filter(function(t){return taskState(t)==='late';});
+  var h='<div class="eyebrow">Checklist</div><h1>Planning <em>checklist</em></h1><p class="sub">Due dates count back from your wedding day. Tap a task to change it.</p>';
+  var late=S.tasks.filter(function(t){return taskState(t)==='late';}).length;
+  h+='<div class="chips" style="margin-top:12px">'+[['open','To do'],['late','Catch up '+late],['done','Done'],['all','All']].map(function(c){return '<button class="chip'+(f===c[0]?' on':'')+'" data-act="tf" data-f="'+c[0]+'">'+c[1]+'</button>';}).join('')+'</div>';
+  var groups={}, order=[]; list.forEach(function(t){ var g=t.days>=365?'12+ months before':t.days>=28?Math.round(t.days/30)+' months before':t.days>=7?Math.round(t.days/7)+(Math.round(t.days/7)===1?' week before':' weeks before'):t.days>=1?'The last few days':'After the wedding'; if(t.days>=28&&t.days<45) g='1 month before'; if(!groups[g]){ groups[g]=[]; order.push(g); } groups[g].push(t); });
+  h+='<div class="card">'+(list.length?order.map(function(g){ return '<div class="grp">'+g+'</div>'+groups[g].map(taskRow).join(''); }).join(''):'<div class="empty"><b>'+(f==='late'?'All caught up':'All clear')+'</b>'+(f==='open'?'Every task is done. Breathe!':'')+'</div>')+'</div>';
+  return h+'<button class="fab" data-act="new" data-c="tasks" aria-label="Add task">+</button>';
+}
+
+function vGuests(){
+  var gs=guestStats(), f=V.gf, q=V.q.trim().toLowerCase(), list=S.guests.slice().sort(function(a,b){return a.name.localeCompare(b.name);});
+  if(f==='Yes'||f==='No'||f==='Pending') list=list.filter(function(g){return g.rsvp===f;}); else if(f==='noseat') list=list.filter(function(g){return g.rsvp==='Yes'&&!g.table;}); else if(f==='thanks') list=list.filter(function(g){return g.gift&&!g.thanks;});
+  if(q) list=list.filter(function(g){ return (g.name+' '+g.group+' '+g.notes).toLowerCase().indexOf(q)>=0; });
+  var h='<div class="eyebrow">Guest list</div><h1>Our <em>guests</em></h1>';
+  h+='<div class="card"><div class="stats"><div class="stat"><b>'+gs.all+'</b><span>on the list</span></div><div class="stat"><b>'+gs.yes+'</b><span>attending</span></div><div class="stat"><b>'+gs.pend+'</b><span>no reply yet</span></div></div>'
+    +'<div class="mini row" style="margin-top:12px;flex-wrap:wrap;gap:8px"><button class="btn small" data-act="go" data-v="seating">Seating plan</button><button class="btn small" data-act="go" data-v="meals">Meal count</button><button class="btn small" data-act="bulk">Add many guests</button><button class="btn small" data-act="importcsv">Import a list (CSV)</button><button class="btn small" data-act="go" data-v="print">Print</button></div></div>';
+  h+='<input class="in" id="q" placeholder="Search guests…" value="'+esc(V.q)+'" style="margin-bottom:8px">';
+  h+='<div class="chips">'+[['all','All '+gs.all],['Yes','Attending'],['Pending','Waiting '+gs.pend],['No','Can’t come'],['noseat','Not seated'],['thanks','Thank-yous']].map(function(c){return '<button class="chip'+(f===c[0]?' on':'')+'" data-act="gf" data-f="'+c[0]+'">'+c[1]+'</button>';}).join('')+'</div>';
+  h+='<div class="card" style="padding-top:6px;padding-bottom:6px">'+(list.length?list.map(function(g){ var t=g.table&&find('tables',g.table);
+    return '<button class="item" data-act="edit" data-c="guests" data-id="'+g.id+'"><span class="av" style="--c:'+COLORS[hash(g.name)%COLORS.length]+'">'+esc(initials(g.name))+'</span><div class="t"><b>'+esc(g.name)+(g.plus?' <span class="hint">+1</span>':'')+'</b><small>'+esc([g.group,g.meal,t?t.name:''].filter(Boolean).join(' · '))+'</small></div><span class="tag '+(g.rsvp==='Yes'?'yes':g.rsvp==='No'?'no':'')+'">'+(g.rsvp==='Yes'?'Attending':g.rsvp==='No'?'Can’t come':g.inv?'Invited':'Not invited yet')+'</span></button>'; }).join(''):'<div class="empty"><b>No guests here</b>Tap + to add your first guest, or “Add many guests” to paste a whole list.</div>')+'</div>';
+  return h+'<button class="fab" data-act="new" data-c="guests" aria-label="Add guest">+</button>';
+}
+
+function vSeating(){
+  var h='<button class="link" data-act="go" data-v="guests">‹ Guests</button><div class="eyebrow" style="margin-top:8px">Seating plan</div><h1>Who sits <em>where</em></h1><p class="sub">Tap a guest, then tap their table. Tap a seated guest to move them.</p>';
+  var unseated=S.guests.filter(function(g){return g.rsvp==='Yes'&&!g.table;}), sel=V.sel&&find('guests',V.sel);
+  if(sel) h+='<div class="selbar"><span>Seating <b>'+esc(sel.name)+'</b>: tap a table</span><span>'+(sel.table?'<button data-act="unseat">Unseat</button> · ':'')+'<button data-act="selguest" data-id="">Cancel</button></span></div>';
+  h+='<div class="card">'+(S.tables.length?'<div class="tables">'+S.tables.map(function(t){ var gs=seatedAt(t.id), used=gs.length+gs.filter(function(g){return g.plus;}).length, free=Math.max(0,(+t.seats||0)-used);
+      return '<div class="table'+(sel?' pick':'')+'" data-act="'+(sel?'seat':'noop')+'" data-id="'+t.id+'"><div class="th"><b>'+esc(t.name)+'</b><button class="link" data-act="edit" data-c="tables" data-id="'+t.id+'">Edit</button></div><div class="hint">'+used+' of '+(+t.seats||0)+' seats</div><ul>'+gs.map(function(g){return '<li data-act="selguest" data-id="'+g.id+'" class="'+(V.sel===g.id?'sel':'')+'" style="cursor:pointer">'+esc(g.name)+(g.plus?' +1':'')+'</li>';}).join('')+(free?'<li class="free">'+free+' free</li>':'')+'</ul></div>'; }).join('')+'</div>':'<div class="empty"><b>No tables yet</b>Tap + to add your first table.</div>')+'</div>';
+  if(unseated.length) h+='<div class="card"><h2>Not seated <em>yet</em></h2><p class="hint" style="margin:4px 0 6px">'+unseated.length+' attending '+(unseated.length===1?'guest':'guests')+'. Tap one, then tap a table.</p>'+unseated.map(function(g){return '<button class="item'+(V.sel===g.id?' sel':'')+'" data-act="selguest" data-id="'+g.id+'"><span class="av" style="--c:'+COLORS[hash(g.name)%COLORS.length]+'">'+esc(initials(g.name))+'</span><div class="t"><b>'+esc(g.name)+(g.plus?' +1':'')+'</b><small>'+esc([g.group,g.side].filter(Boolean).join(' · '))+'</small></div></button>';}).join('')+'</div>';
+  else if(S.tables.length&&S.guests.some(function(g){return g.rsvp==='Yes';})) h+='<p class="hint" style="text-align:center">Everyone attending has a seat ✓</p>';
+  return h+'<button class="btn wide" data-act="go" data-v="print">Print seating chart and table cards</button><button class="fab" data-act="new" data-c="tables" aria-label="Add table">+</button>';
+}
+function vMeals(){
+  var yes=S.guests.filter(function(g){return g.rsvp==='Yes';}), o={}; yes.forEach(function(g){ var m=g.meal||'Not chosen yet'; o[m]=(o[m]||0)+1+(g.plus?1:0); });
+  var h='<button class="link" data-act="go" data-v="guests">‹ Guests</button><div class="eyebrow" style="margin-top:8px">For your caterer</div><h1>Meal <em>count</em></h1><p class="sub">Attending guests only, plus ones included.</p>';
+  var diet=yes.filter(function(g){return g.diet;}), kids=yes.filter(function(g){return g.child;}).length;
+  h+='<div class="card"><div class="list-kv">'+Object.keys(o).sort().map(function(m){return '<div><span>'+esc(m)+'</span><b>'+o[m]+'</b></div>';}).join('')+'<div><b>Total</b><b>'+yes.reduce(function(s,g){return s+1+(g.plus?1:0);},0)+'</b></div>'+(kids?'<div><span>of which children</span><b>'+kids+'</b></div>':'')+'</div></div>';
+  h+='<div class="card"><h2>Dietary needs <em>&amp; allergies</em></h2>'+(diet.length?'<div class="list-kv" style="margin-top:8px">'+diet.map(function(g){ var t=g.table&&find('tables',g.table); return '<div><span>'+esc(g.name)+(t?' <span class="hint">· '+esc(t.name)+'</span>':'')+'</span><b>'+esc(g.diet)+'</b></div>'; }).join('')+'</div>':'<p class="hint" style="margin-top:6px">Add dietary needs on each guest and they show here for your caterer.</p>')+'</div>';
+  return h+'<button class="btn wide" data-act="printdo" data-p="meals">Print for the caterer</button>';
+}
+function seatedAt(tid){ return S.guests.filter(function(g){return g.table===tid&&g.rsvp!=='No';}); }
+
+function vBudget(){
+  var cost=S.items.reduce(function(s,x){return s+(num(x.act)||num(x.est));},0), paid=sum(S.items,'paid');
+  var h='<div class="eyebrow">Budget</div><h1>Our <em>budget</em></h1><p class="sub">Each category gets a share of your total. Add every cost as you book it.</p>';
+  var gy=guestStats().yes, toPay=Math.max(0,cost-paid), nDue=S.items.filter(function(x){ return itemCost(x)-num(x.paid)>0; }).length;
+  h+='<div class="card"><div class="stats"><div class="stat"><b>'+money(S.budget)+'</b><span>total budget</span></div><div class="stat'+(S.budget&&cost>S.budget?' red':'')+'"><b>'+money(cost)+'</b><span>planned costs</span></div><div class="stat"><b>'+money(paid)+'</b><span>paid</span></div><div class="stat"><b>'+money(toPay)+'</b><span>still to pay</span></div><div class="stat"><b>'+(S.budget?money(Math.max(0,S.budget-cost)):'–')+'</b><span>not yet spent</span></div><div class="stat"><b>'+(gy?money(cost/gy):'–')+'</b><span>per guest</span></div></div>'+(S.budget?'':'<p class="hint" style="margin-top:10px">Set your total budget in <button class="link" data-act="go" data-v="settings">Settings</button>.</p>')
+    +'<div class="row" style="margin-top:12px;flex-wrap:wrap;gap:8px"><button class="btn small" data-act="go" data-v="payments">Payment schedule'+(nDue?' ('+nDue+')':'')+'</button><button class="btn small" data-act="printdo" data-p="budget">Print budget</button></div></div>';
+  var pb={}; S.items.forEach(function(x){ var k=x.paidby||'Us'; pb[k]=pb[k]||[0,0]; pb[k][0]+=itemCost(x); pb[k][1]+=num(x.paid); });
+  if(Object.keys(pb).length>1||S.items.some(function(x){return x.paidby&&x.paidby!=='Us';})) h+='<div class="card"><h2>Who’s <em>paying</em></h2><div class="list-kv" style="margin-top:8px">'+Object.keys(pb).map(function(k){ return '<div><span>'+esc(k)+'</span><b>'+money(pb[k][0])+' <span class="hint" style="font-weight:400">· '+money(pb[k][1])+' paid</span></b></div>'; }).join('')+'</div></div>';
+  h+='<div class="card"><h2>By <em>category</em></h2>';
+  S.cats.forEach(function(c){ var its=S.items.filter(function(x){return x.cat===c.name;}), used=its.reduce(function(s,x){return s+(num(x.act)||num(x.est));},0), plan=catPlan(c); if(!plan&&!its.length) return;
+    h+='<div style="padding:10px 0;border-bottom:1px solid var(--line)"><div class="row" style="justify-content:space-between"><b style="font-weight:600">'+esc(c.name)+'</b><span class="hint">'+money(used)+' / '+money(plan)+'</span></div><div class="bar'+(plan&&used>plan?' over':'')+'"><i style="width:'+(plan?Math.min(100,used/plan*100):(used?100:0))+'%"></i></div>'
+      +its.map(function(x){ var c2=num(x.act)||num(x.est), left=c2-num(x.paid); return '<button class="item" data-act="edit" data-c="items" data-id="'+x.id+'" style="padding:8px 0"><div class="t"><b style="font-weight:500;font-size:14px">'+esc(x.name)+'</b><small>'+(left>0?money(left)+' still to pay'+(x.due?' · due '+fmtDate(x.due):''):'Paid in full ✓')+'</small></div><div class="r">'+money(c2)+'</div></button>'; }).join('')+'</div>'; });
+  h+='<p class="hint" style="margin-top:10px">Change the categories and their % in <button class="link" data-act="go" data-v="cats">Budget categories</button>.</p></div>';
+  return h+'<button class="fab" data-act="new" data-c="items" aria-label="Add cost">+</button>';
+}
+function vCats(){
+  var tot=S.cats.reduce(function(s,c){return s+(+c.pct||0);},0);
+  var h='<button class="link" data-act="go" data-v="budget">‹ Budget</button><div class="eyebrow" style="margin-top:8px">Budget categories</div><h1>Split your <em>budget</em></h1><p class="sub">Give each category a % of your total. Rename them any way you like.</p><div class="card">';
+  S.cats.forEach(function(c,i){ h+='<div class="row" style="gap:8px;margin:6px 0"><input class="in" data-cat="'+i+'" data-f="name" value="'+esc(c.name)+'"><input class="in" data-cat="'+i+'" data-f="pct" value="'+esc(c.pct)+'" inputmode="decimal" style="width:76px;text-align:right"><span class="hint">%</span></div>'; });
+  return h+'<p class="hint" style="margin-top:10px;color:'+(Math.round(tot)===100?'var(--ok)':'var(--warn)')+'">Total: '+tot+'%'+(Math.round(tot)===100?' ✓':' · should add up to 100%')+'</p><div class="row" style="margin-top:12px"><button class="btn" data-act="addcat">+ Add category</button><button class="btn primary" data-act="savecats">Save</button></div></div>';
+}
+
+function vVendors(){
+  var by={}; S.vendors.forEach(function(v){ (by[v.cat||'Other']=by[v.cat||'Other']||[]).push(v); });
+  var h='<button class="link" data-act="go" data-v="more">‹ More</button><div class="eyebrow" style="margin-top:8px">Vendors</div><h1>Our <em>vendors</em></h1><p class="sub">Compare quotes, keep every contact in one place.</p><div class="card">';
+  var ks=Object.keys(by).sort(); h+=ks.length?ks.map(function(k){ return '<div class="grp">'+esc(k)+'</div>'+by[k].map(function(v){ return '<button class="item" data-act="edit" data-c="vendors" data-id="'+v.id+'"><div class="t"><b>'+esc(v.name)+'</b><small>'+esc([v.contact,v.phone].filter(Boolean).join(' · ')||v.email||'')+'</small></div><div class="r">'+(num(v.quote)?money(v.quote):'')+'<small>'+(v.booked?'<span class="tag yes">Booked</span>':'<span class="tag">Quote</span>')+'</small></div></button>'; }).join(''); }).join(''):'<div class="empty"><b>No vendors yet</b>Tap + to add your venue, photographer, florist…</div>';
+  return h+'</div><button class="fab" data-act="new" data-c="vendors" aria-label="Add vendor">+</button>';
+}
+function vTimeline(){
+  var h='<button class="link" data-act="go" data-v="more">‹ More</button><div class="eyebrow" style="margin-top:8px">'+(S.date?fmtDate(S.date,true):'The big day')+'</div><h1>Wedding-day <em>timeline</em></h1><p class="sub">Your day hour by hour. Share it with your vendors and wedding party the week before.</p><div class="card">';
+  var list=S.timeline.slice().sort(function(a,b){return tmin(a.time)-tmin(b.time);});
+  h+=list.map(function(r){ return '<button class="tl" data-act="edit" data-c="timeline" data-id="'+r.id+'" style="text-align:left"><span class="time">'+esc(r.time)+'</span><span><b style="font-weight:600">'+esc(r.what)+'</b>'+(r.where||r.who?'<small>'+esc([r.where,r.who].filter(Boolean).join(' · '))+'</small>':'')+'</span></button>'; }).join('');
+  return h+'</div><button class="btn wide" data-act="sharetl">Copy timeline to share</button><button class="fab" data-act="new" data-c="timeline" aria-label="Add moment">+</button>';
+}
+function tmin(t){ var m=String(t||'').match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/i); if(!m) return 9999; var h=+m[1]%12, ap=(m[3]||'').toLowerCase(); if(ap==='pm') h+=12; if(!ap&&+m[1]<8) h+=12; return h*60+(+m[2]||0); }
+
+function vPayments(){
+  var list=S.items.filter(function(x){ return itemCost(x)-num(x.paid)>0; }).sort(function(a,b){ return (a.due||'9999').localeCompare(b.due||'9999'); }), tot=list.reduce(function(s,x){ return s+itemCost(x)-num(x.paid); },0);
+  var h='<button class="link" data-act="go" data-v="budget">‹ Budget</button><div class="eyebrow" style="margin-top:8px">Payment schedule</div><h1>What’s <em>due</em></h1><p class="sub">'+(list.length?money(tot)+' still to pay across '+list.length+(list.length===1?' cost':' costs')+'.':'Nothing left to pay.')+' Add a reminder to your phone’s calendar so nothing slips.</p><div class="card">';
+  h+=list.length?list.map(function(x){ var n=x.due?daysUntil(x.due):null;
+    return '<div class="item"><button class="t" data-act="edit" data-c="items" data-id="'+x.id+'"><b>'+esc(x.name)+'</b><small>'+(x.due?fmtDate(x.due):'No due date yet')+(x.paidby&&x.paidby!=='Us'?' · '+esc(x.paidby):'')+'</small></button><div class="r">'+money(itemCost(x)-num(x.paid))+'<small>'+(n===null?'':'<span class="tag '+(n<0?'late':n<=14?'soon':'')+'">'+(n<0?'past due':n===0?'today':'in '+n+' days')+'</span>')+'</small></div>'+(x.due?'<button class="btn small" data-act="ics" data-id="'+x.id+'" aria-label="Add reminder to calendar" title="Add to calendar">📅</button>':'')+'</div>'; }).join(''):'<div class="empty"><b>All paid ✓</b>Every cost is paid in full.</div>';
+  return h+'</div>';
+}
+function vParty(){
+  var h='<button class="link" data-act="go" data-v="more">‹ More</button><div class="eyebrow" style="margin-top:8px">Wedding party &amp; helpers</div><h1>Who does <em>what</em></h1><p class="sub">Roles, outfits and jobs on the day, so nobody has to ask you.</p><div class="card">';
+  h+=S.party.length?S.party.map(function(p){ return '<button class="item" data-act="edit" data-c="party" data-id="'+p.id+'"><span class="av" style="--c:'+COLORS[hash(p.name)%COLORS.length]+'">'+esc(initials(p.name))+'</span><div class="t"><b>'+esc(p.name)+'</b><small>'+esc([p.role,p.jobs].filter(Boolean).join(' · '))+'</small></div>'+(p.outfit?'<span class="tag">'+esc(p.outfit.length>18?p.outfit.slice(0,17)+'…':p.outfit)+'</span>':'')+'</button>'; }).join(''):'<div class="empty"><b>No one yet</b>Add your wedding party, family helpers and ushers with the + button.</div>';
+  return h+'</div>'+(S.party.length?'<button class="btn wide" data-act="printdo" data-p="party">Print the who-does-what list</button>':'')+'<button class="fab" data-act="new" data-c="party" aria-label="Add person">+</button>';
+}
+function vPack(){
+  var done=S.pack.filter(function(p){return p.done;}).length;
+  var h='<button class="link" data-act="go" data-v="more">‹ More</button><div class="eyebrow" style="margin-top:8px">Wedding-day bag</div><h1>Pack the <em>essentials</em></h1><p class="sub">Your emergency kit for the day. Give the bag to someone you trust.</p><div class="card"><div class="bar"><i style="width:'+(S.pack.length?done/S.pack.length*100:0)+'%"></i></div><p class="hint">'+done+' of '+S.pack.length+' packed</p>';
+  h+=S.pack.map(function(p){ return '<div class="item'+(p.done?' done':'')+'"><button class="check'+(p.done?' on':'')+'" data-act="packtick" data-id="'+p.id+'" aria-label="Packed">'+(p.done?'✓':'')+'</button><button class="t" data-act="edit" data-c="pack" data-id="'+p.id+'"><b>'+esc(p.name)+'</b></button></div>'; }).join('');
+  return h+'</div><button class="btn wide" data-act="printdo" data-p="pack">Print the packing list</button><button class="fab" data-act="new" data-c="pack" aria-label="Add item">+</button>';
+}
+function vBoard(){
+  var B=S.board, h='<button class="link" data-act="go" data-v="more">‹ More</button><div class="eyebrow" style="margin-top:8px">Mood board</div><h1>Our <em>vision</em></h1><p class="sub">Photos, colors and ideas for the look and feel of your day.</p>';
+  h+='<div class="card"><div class="head"><h2>Colors</h2><span class="hint">Tap a color to remove it</span></div><div class="swatches">'+B.colors.map(function(c,i){ return '<button class="sw" style="background:'+esc(c)+'" data-act="delcolor" data-i="'+i+'" aria-label="Remove color '+esc(c)+'"></button>'; }).join('')+'<input type="color" id="newcolor" value="#C9A464" aria-label="Pick a color"><button class="btn small" data-act="addcolor">+ Add color</button></div></div>';
+  h+='<div class="card"><div class="head"><h2>Photos</h2><span class="hint">'+B.photos.length+' of 30</span></div><div class="photos">'+B.photos.map(function(p){ return '<div><img src="'+esc(p.src)+'" alt="" loading="lazy"><button data-act="delphoto" data-id="'+p.id+'" aria-label="Remove photo">×</button></div>'; }).join('')+(B.photos.length<30?'<div class="add" data-act="addphoto">＋<br>Add photos</div>':'')+'</div><p class="hint" style="margin-top:8px">Save ideas from Pinterest or Instagram to your phone, then add them here. Photos are made smaller so they fit on your device.</p></div>';
+  h+='<div class="card"><h2>Ideas <em>&amp; notes</em></h2><textarea class="in" id="boardnotes" style="margin-top:10px;min-height:140px" placeholder="Flowers, decor, outfits, the feeling you want…">'+esc(B.notes)+'</textarea><p class="hint" style="margin-top:6px">Saved as you type.</p></div>';
+  return h;
+}
+var PRINTS=[['guests','Guest list','Names, RSVP, meal, table and addresses'],['seating','Seating chart','Every table and who sits there'],['findseat','Find your seat','Guests A to Z with their table, for the entrance'],['cards','Table cards','One big card per table, two per page'],['meals','Meal count','Meals and dietary needs for the caterer'],['timeline','Wedding-day timeline','For vendors and the wedding party'],['party','Who does what','Wedding party roles and jobs'],['budget','Budget','Every cost, paid and still to pay'],['checklist','Checklist','All tasks with their due dates'],['pack','Wedding-day bag','Packing list with tick boxes']];
+function vPrint(){
+  return '<button class="link" data-act="go" data-v="more">‹ More</button><div class="eyebrow" style="margin-top:8px">Print &amp; share</div><h1>Print or <em>save as PDF</em></h1><p class="sub">Choose a list. Your phone or computer opens its print window, where you can print or save it as a PDF to send.</p><div class="card menu">'
+    +PRINTS.map(function(p){ return '<button class="item" data-act="printdo" data-p="'+p[0]+'"><span class="ic">🖨</span><div class="t"><b>'+p[1]+'</b><small>'+p[2]+'</small></div><span class="hint">›</span></button>'; }).join('')+'</div>';
+}
+function printDoc(kind){
+  var T=function(rows,head){ return '<table><tr>'+head.map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr>'+rows.map(function(r){ return '<tr>'+r.map(function(c){return '<td>'+esc(c==null?'':c).replace(/\n/g,'<br>')+'</td>';}).join('')+'</tr>'; }).join('')+'</table>'; };
+  var tn=function(g){ var t=g.table&&find('tables',g.table); return t?t.name:''; }, att=S.guests.filter(function(g){return g.rsvp==='Yes';}), byName=function(a,b){return a.name.localeCompare(b.name);}, title='', b='';
+  if(kind==='guests'){ title='Guest list'; b=T(S.guests.slice().sort(byName).map(function(g){ return [g.name+(g.plus?' +1':''),g.rsvp,g.meal+(g.diet?' ('+g.diet+')':''),tn(g),g.address||'']; }),['Name','RSVP','Meal','Table','Address']); }
+  else if(kind==='seating'){ title='Seating chart'; b='<div class="cols">'+S.tables.map(function(t){ var gs=seatedAt(t.id); return '<h2>'+esc(t.name)+' <span style="font-size:10pt;color:#888">'+gs.length+' of '+(+t.seats||0)+'</span></h2>'+gs.map(function(g){return '<div><span>'+esc(g.name)+(g.plus?' +1':'')+'</span><span style="color:#888">'+esc(g.meal||'')+'</span></div>';}).join(''); }).join('')+'</div>'; }
+  else if(kind==='findseat'){ title='Find your seat'; b='<div class="cols" style="font-size:13pt">'+att.slice().sort(byName).map(function(g){ return '<div><span>'+esc(g.name)+'</span><b>'+esc(tn(g)||'–')+'</b></div>'; }).join('')+'</div>'; }
+  else if(kind==='cards'){ title='Table cards'; b='<div class="cards">'+S.tables.map(function(t){ return '<div class="tc"><b>'+esc(t.name)+'</b>'+seatedAt(t.id).map(function(g){return '<div>'+esc(g.name)+(g.plus?' & guest':'')+'</div>';}).join('')+'</div>'; }).join('')+'</div>'; }
+  else if(kind==='meals'){ title='Meal count'; var o={}; att.forEach(function(g){ var m=g.meal||'Not chosen yet'; o[m]=(o[m]||0)+1+(g.plus?1:0); }); b=T(Object.keys(o).sort().map(function(k){return [k,o[k]];}),['Meal','Guests'])+'<h2>Dietary needs and allergies</h2>'+T(att.filter(function(g){return g.diet;}).map(function(g){return [g.name,tn(g),g.diet];}),['Guest','Table','Needs']); }
+  else if(kind==='timeline'){ title='Wedding-day timeline'; b=T(S.timeline.slice().sort(function(x,y){return tmin(x.time)-tmin(y.time);}).map(function(r){return [r.time,r.what,r.where,r.who];}),['Time','What','Where','Who']); }
+  else if(kind==='party'){ title='Who does what'; b=T(S.party.map(function(p){return [p.name,p.role,p.phone,p.outfit,p.jobs];}),['Name','Role','Phone','Outfit','Jobs on the day']); }
+  else if(kind==='budget'){ title='Budget'; b=T(S.items.map(function(x){return [x.name,x.cat,money(itemCost(x)),money(x.paid),money(Math.max(0,itemCost(x)-num(x.paid))),x.due?fmtDate(x.due):'',x.paidby||''];}),['Cost','Category','Total','Paid','To pay','Due','Paid by'])+'<p style="margin-top:10pt"><b>Total budget '+money(S.budget)+' · Planned '+money(S.items.reduce(function(s,x){return s+itemCost(x);},0))+' · Paid '+money(sum(S.items,'paid'))+'</b></p>'; }
+  else if(kind==='checklist'){ title='Planning checklist'; b=S.tasks.slice().sort(function(a,c){return c.days-a.days;}).map(function(t){ var d=taskDue(t); return '<div style="padding:4pt 0;border-bottom:1px dotted #ccc"><span class="box">'+(t.done?'✓':'')+'</span>'+esc(t.name)+(d?' <span style="color:#888">· '+fmtDate(d)+'</span>':'')+'</div>'; }).join(''); }
+  else if(kind==='pack'){ title='Wedding-day bag'; b='<div class="cols">'+S.pack.map(function(p){ return '<div><span><span class="box">'+(p.done?'✓':'')+'</span>'+esc(p.name)+'</span></div>'; }).join('')+'</div>'; }
+  document.getElementById('print').innerHTML='<div class="pb">'+esc(plain())+(S.date?' · '+fmtDate(S.date,true):'')+'</div><h1>'+title+'</h1>'+b;
+  setTimeout(function(){ window.print(); },60);
+}
+function ics(x){ var d=x.due.replace(/-/g,''), n=new Date(), st=n.getUTCFullYear()+pad(n.getUTCMonth()+1)+pad(n.getUTCDate())+'T'+pad(n.getUTCHours())+pad(n.getUTCMinutes())+'00Z', e=function(s){ return String(s).replace(/[\\,;]/g,function(c){return '\\'+c;}).replace(/\n/g,'\\n'); };
+  var nd=parseD(x.due); nd.setDate(nd.getDate()+1);
+  return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Her Midnight Edit//Calm Wedding Planner//EN','BEGIN:VEVENT','UID:'+x.id+'-'+d+'@calm-wedding','DTSTAMP:'+st,'DTSTART;VALUE=DATE:'+d,'DTEND;VALUE=DATE:'+iso(nd).replace(/-/g,''),'SUMMARY:'+e('Wedding payment due: '+x.name+' ('+money(itemCost(x)-num(x.paid))+')'),'DESCRIPTION:'+e('From your Calm Wedding Planner'),'BEGIN:VALARM','TRIGGER:-P3D','ACTION:DISPLAY','DESCRIPTION:'+e('Payment due in 3 days: '+x.name),'END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n'); }
+
+function vMore(){
+  var gs=guestStats();
+  var rows=[['vendors','🤝','Vendors',S.vendors.length+' vendors · '+S.vendors.filter(function(v){return v.booked;}).length+' booked'],['timeline','🕰','Wedding-day timeline',S.timeline.length+' moments'],['board','🎨','Mood board',S.board.photos.length+' photos · '+S.board.colors.length+' colors'],['party','👥','Wedding party & helpers',S.party.length+' people'],['pack','🧳','Wedding-day bag',S.pack.filter(function(p){return p.done;}).length+' of '+S.pack.length+' packed'],['payments','📅','Payment schedule','Due dates and calendar reminders'],['print','🖨','Print & share','Guest list, seating, table cards and more'],['seating','🪑','Seating plan',S.tables.length+' tables'],['meals','🍽','Meal count',gs.yes+' attending'],['cats','％','Budget categories',S.cats.length+' categories'],['settings','⚙︎','Settings & backup','Names, date, budget, currency, theme']];
+  return '<div class="eyebrow">More</div><h1>Everything <em>else</em></h1><div class="card menu">'+rows.map(function(r){return '<button class="item" data-act="go" data-v="'+r[0]+'"><span class="ic">'+r[1]+'</span><div class="t"><b>'+r[2]+'</b><small>'+r[3]+'</small></div><span class="hint">›</span></button>';}).join('')+'</div><p class="hint" style="text-align:center;margin:10px 0">Calm Wedding Planner · made with care by Her Midnight Edit</p>';
+}
+function vSettings(){
+  var h='<button class="link" data-act="go" data-v="more">‹ More</button><div class="eyebrow" style="margin-top:8px">Settings</div><h1>Our <em>wedding</em></h1>';
+  h+='<div class="card"><div class="two"><label class="field"><span>Partner 1</span><input class="in" id="s_p1" value="'+esc(S.p1)+'" placeholder="Name"></label><label class="field"><span>Partner 2</span><input class="in" id="s_p2" value="'+esc(S.p2)+'" placeholder="Name"></label></div>'
+    +'<label class="field"><span>Wedding date</span><input class="in" type="date" id="s_date" value="'+esc(S.date)+'"></label><label class="field"><span>Venue</span><input class="in" id="s_venue" value="'+esc(S.venue)+'" placeholder="Optional"></label>'
+    +'<div class="two"><label class="field"><span>Total budget</span><input class="in" id="s_budget" inputmode="decimal" value="'+(S.budget||'')+'" placeholder="25000"></label><label class="field"><span>Currency</span><select class="in" id="s_cur">'+CURRENCIES.map(function(c){return '<option value="'+c[0]+'"'+(S.cur===c[0]?' selected':'')+'>'+c[1]+'</option>';}).join('')+'</select></label></div>'
+    +'<div class="field"><span>Look</span><div class="seg"><button data-act="settheme" data-t="light" class="'+(S.theme!=='dark'?'on':'')+'">Light</button><button data-act="settheme" data-t="dark" class="'+(S.theme==='dark'?'on':'')+'">Dark</button></div></div><button class="btn primary wide" data-act="savesettings">Save</button></div>';
+  h+='<div class="card"><h2>Back up your <em>plans</em></h2><p class="hint" style="margin:4px 0 12px">Everything is saved in this browser only. Download a backup now and then. Restore it on a new phone, or send it to your partner to open on theirs.</p><div class="two"><button class="btn" data-act="backup">Download backup</button><button class="btn" data-act="restore">Restore backup</button></div><button class="btn wide" style="margin-top:10px" data-act="csv">Export guest list (CSV)</button></div>';
+  h+='<div class="card"><h2>Plan <em>together</em></h2><p class="hint" style="margin:4px 0 12px">You each keep the planner on your own phone. Now and then, one of you taps Download backup and sends it to the other, who taps <b>Join partner’s changes</b>. New guests, costs and ticked tasks from both of you are kept. Where you both changed the same thing, the newest change wins.</p><button class="btn wide" data-act="merge">Join partner’s changes</button></div>';
+  h+='<div class="card"><h2>Good to <em>know</em></h2><p class="hint" style="margin-top:6px"><b>Add it to your home screen</b> so it opens like an app. iPhone: tap Share, then Add to Home Screen. Android: tap the menu, then Install app.<br><br><b>Works offline</b> once opened. No account, no subscription, no ads. Nothing is sent anywhere.</p></div>';
+  h+='<div class="card"><button class="btn wide danger" data-act="wipe">Start over (delete everything)</button></div>';
+  return h;
+}
+
+/* ---------- render ---------- */
+function render(){
+  document.documentElement.setAttribute('data-theme',S.theme==='dark'?'dark':'light');
+  var m=document.querySelector('meta[name=theme-color]'); if(m) m.setAttribute('content',S.theme==='dark'?'#0E1222':'#FBF7EF');
+  var fn={home:vHome,tasks:vTasks,guests:vGuests,seating:vSeating,meals:vMeals,budget:vBudget,cats:vCats,vendors:vVendors,timeline:vTimeline,more:vMore,settings:vSettings,form:vForm,payments:vPayments,party:vParty,pack:vPack,board:vBoard,print:vPrint}[V.view]||vHome;
+  document.getElementById('main').innerHTML=demoBar()+topbar()+fn();
+  var cur={home:'home',tasks:'tasks',guests:'guests',seating:'guests',meals:'guests',budget:'budget',cats:'budget',payments:'budget',form:V.back}[V.view]||'more';
+  var bn=document.getElementById('boardnotes'); if(bn) bn.oninput=function(){ S.board.notes=bn.value; S.board.u=Date.now(); clearTimeout(bn._t); bn._t=setTimeout(save,400); };
+  document.getElementById('nav').innerHTML=[['home','Home','home'],['tasks','Checklist','check'],['guests','Guests','guests'],['budget','Budget','budget'],['more','More','more']].map(function(n){return '<button data-act="go" data-v="'+n[0]+'" class="'+(cur===n[0]?'on':'')+'">'+icon(n[2])+n[1]+'</button>';}).join('');
+  var q=document.getElementById('q'); if(q) q.oninput=function(){ V.q=q.value; var p=q.selectionStart; render(); var n=document.getElementById('q'); n.focus(); n.setSelectionRange(p,p); };
+}
+
+/* ---------- actions ---------- */
+document.addEventListener('input',function(e){ var k=e.target.getAttribute('data-k'); if(k&&V.draft&&V.view==='form') V.draft[k]=e.target.type==='checkbox'?e.target.checked:e.target.value; });
+document.addEventListener('change',function(e){ var k=e.target.getAttribute('data-k'); if(k&&V.draft&&V.view==='form'){ V.draft[k]=e.target.type==='checkbox'?e.target.checked:e.target.value; if(V.coll==='vendors'&&(k==='cat'||k==='booked')) render(); } });
+document.addEventListener('click',function(e){
+  var el=e.target.closest('[data-act]'); if(!el) return; var a=el.getAttribute('data-act'), id=el.getAttribute('data-id');
+  if(a==='go') return go(el.getAttribute('data-v'));
+  if(a==='back') return go(V.back||'home');
+  if(a==='theme'){ S.theme=S.theme==='dark'?'light':'dark'; save(); return render(); }
+  if(a==='settheme'){ S.theme=el.getAttribute('data-t'); save(); return render(); }
+  if(a==='tf'){ V.tf=el.getAttribute('data-f'); return render(); }
+  if(a==='gf'){ V.gf=el.getAttribute('data-f'); return render(); }
+  if(a==='tick'){ var t=find('tasks',id); t.done=!t.done; t.u=Date.now(); save(); if(t.done) toast('Done ✓ One less thing'); return render(); }
+  if(a==='notnow'){ V.skip=(V.skip||[]).concat([id]); return render(); }
+  if(a==='noop') return;
+  if(a==='selguest'){ V.sel=id&&V.sel!==id?id:null; return render(); }
+  if(a==='seat'){ var sg=find('guests',V.sel), tb=find('tables',id); if(!sg||!tb) return; var used=seatedAt(tb.id).filter(function(g){return g.id!==sg.id;}).reduce(function(s,g){return s+1+(g.plus?1:0);},0)+1+(sg.plus?1:0);
+    if(used>(+tb.seats||0)&&!confirm(tb.name+' only has '+(+tb.seats||0)+' seats. Seat '+sg.name+' there anyway?')) return; sg.table=tb.id; sg.u=Date.now(); V.sel=null; save(); toast(sg.name+' → '+tb.name); return render(); }
+  if(a==='unseat'){ var ug=find('guests',V.sel); if(ug){ ug.table=''; ug.u=Date.now(); save(); } V.sel=null; return render(); }
+  if(a==='askq'){ var qq=el.getAttribute('data-q'); V.draft.asked=(V.draft.asked||[]).filter(function(x){return x!==qq;}); if(el.checked) V.draft.asked.push(qq); return; }
+  if(a==='packtick'){ var pk=find('pack',id); pk.done=!pk.done; pk.u=Date.now(); save(); return render(); }
+  if(a==='addcolor'){ var cv=document.getElementById('newcolor').value; if(S.board.colors.indexOf(cv)<0) S.board.colors.push(cv); S.board.u=Date.now(); save(); return render(); }
+  if(a==='delcolor'){ S.board.colors.splice(+el.getAttribute('data-i'),1); S.board.u=Date.now(); save(); return render(); }
+  if(a==='addphoto'){ var ph=document.getElementById('photo'); ph.value=''; ph.click(); return; }
+  if(a==='delphoto'){ if(!confirm('Remove this photo from your mood board?')) return; S.board.photos=S.board.photos.filter(function(p){return p.id!==id;}); S.gone[id]=Date.now(); save(); return render(); }
+  if(a==='printdo') return printDoc(el.getAttribute('data-p'));
+  if(a==='ics'){ var ix=find('items',id); if(ix&&ix.due) download('payment-'+ix.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,30)+'.ics',ics(ix),'text/calendar'); toast('Open the file to add the reminder to your calendar'); return; }
+  if(a==='importcsv'){ if(DEMO_MODE) return toast('Importing works in the full app'); fileMode='csv'; var fc=document.getElementById('file'); fc.value=''; fc.click(); return; }
+  if(a==='merge'){ if(DEMO_MODE) return toast('This works in the full app'); fileMode='merge'; var fm=document.getElementById('file'); fm.value=''; fm.click(); return; }
+  if(a==='edit') return openForm(el.getAttribute('data-c'),id);
+  if(a==='new'){ var c=el.getAttribute('data-c'), pre={guests:{rsvp:'Pending',group:'',std:false,inv:false},items:{cat:'Venue'},tasks:{days:30,done:false},tables:{name:'Table '+(S.tables.length+1),seats:8},timeline:{time:'',what:''},vendors:{booked:false}}[c]; return openForm(c,null,pre); }
+  if(a==='seg'){ V.draft[el.getAttribute('data-k')]=el.getAttribute('data-v'); return render(); }
+  if(a==='saveform') return saveForm();
+  if(a==='delform'){ if(!confirm('Delete this '+FORMS[V.coll].one+'?')) return; S[V.coll]=S[V.coll].filter(function(x){return x.id!==V.draft.id;}); S.gone[V.draft.id]=Date.now(); if(V.coll==='tables') S.guests.forEach(function(g){ if(g.table===V.draft.id) g.table=''; }); save(); toast('Deleted'); return go(V.back); }
+  if(a==='bulk'){ var t2=prompt('Paste or type names, one per line or separated by commas:'); if(!t2) return; var ns=t2.split(/[\n,]+/).map(function(s){return s.trim();}).filter(Boolean); ns.forEach(function(n){ S.guests.push(newGuest({name:n})); }); save(); toast(ns.length+' guests added'); return render(); }
+  if(a==='addcat'){ S.cats.push({name:'New category',pct:0}); save(); return render(); }
+  if(a==='savecats'){ document.querySelectorAll('[data-cat]').forEach(function(inp){ var c=S.cats[+inp.getAttribute('data-cat')]; if(inp.getAttribute('data-f')==='name') c.name=inp.value.trim()||c.name; else c.pct=num(inp.value); }); S.cats=S.cats.filter(function(c){return c.name;}); save(); toast('Saved'); return render(); }
+  if(a==='savesettings'){ S.p1=v('s_p1'); S.p2=v('s_p2'); S.date=v('s_date'); S.venue=v('s_venue'); S.budget=num(v('s_budget')); S.cur=v('s_cur'); S.su=Date.now(); save(); toast('Saved'); return go('home'); }
+  if(a==='sharetl'){ var txt=(S.p1||S.p2?S.p1+' & '+S.p2+' · ':'')+(S.date?fmtDate(S.date,true):'Wedding day')+'\n\n'+S.timeline.slice().sort(function(x,y){return tmin(x.time)-tmin(y.time);}).map(function(r){return r.time+'  '+r.what+(r.where?' ('+r.where+')':'')+(r.who?' · '+r.who:'');}).join('\n');
+    if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ toast('Timeline copied. Paste it in a message or email.'); },function(){ prompt('Copy your timeline:',txt); }); else prompt('Copy your timeline:',txt); return; }
+  if(a==='backup'){ download('calm-wedding-backup-'+today()+'.json',JSON.stringify(S,null,1),'application/json'); return; }
+  if(a==='restore'){ if(DEMO_MODE) return toast('Restoring works in the full app'); var f=document.getElementById('file'); f.value=''; f.click(); return; }
+  if(a==='csv'){ download('guest-list-'+today()+'.csv',guestCSV(),'text/csv'); return; }
+  if(a==='wipe'){ if(!confirm('Delete everything and start over? Download a backup first if you might want it.')) return; if(!confirm('Are you sure? This can’t be undone.')) return; var th=S.theme; S=blank(); S.theme=th; save(); toast('Fresh start'); return go('home'); }
+});
+function v(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+function saveForm(){
+  var d=V.draft, F=FORMS[V.coll], first=F.fields[0][0];
+  if(!String(d[first]||'').trim()){ toast('Please fill in “'+F.fields[0][1]+'”'); return; }
+  F.fields.forEach(function(f){ if(f[2]==='money'||f[2]==='number') d[f[0]]=num(d[f[0]]); if(typeof d[f[0]]==='string') d[f[0]]=d[f[0]].trim(); });
+  d.u=Date.now();
+  var x=find(V.coll,d.id); if(x){ for(var k in d) x[k]=d[k]; } else S[V.coll].push(d);
+  var msg=x?'Saved':'Added';
+  if(V.coll==='vendors'&&d.booked&&num(d.quote)&&!S.items.some(function(i){ return i.vendorId===d.id; })){ S.items.push({id:uid(),name:d.name,cat:d.cat||'Other',est:num(d.quote),act:num(d.quote),paid:0,due:'',paidby:'Us',vendor:d.name,vendorId:d.id,u:Date.now()}); msg='Booked! Added to your budget'; }
+  save(); toast(msg); go(V.back);
+}
+function newGuest(o){ var g={id:uid(),name:'',group:'',side:'',std:false,inv:false,rsvp:'Pending',meal:'',diet:'',table:'',plus:false,child:false,phone:'',email:'',address:'',gift:'',thanks:false,notes:''}; for(var k in o) g[k]=o[k]; return g; }
+var fileMode='';
+function parseCSV(t){ var rows=[],row=[],f='',q=false; for(var i=0;i<t.length;i++){ var c=t[i];
+    if(q){ if(c==='"'){ if(t[i+1]==='"'){ f+='"'; i++; } else q=false; } else f+=c; }
+    else if(c==='"') q=true; else if(c===','||c===';'||c==='\t'){ row.push(f); f=''; } else if(c==='\n'||c==='\r'){ if(c==='\r'&&t[i+1]==='\n') i++; row.push(f); rows.push(row); row=[]; f=''; } else f+=c; }
+  if(f!==''||row.length){ row.push(f); rows.push(row); } return rows.filter(function(r){return r.join('').trim()!=='';}); }
+function importGuests(text){ var rows=parseCSV(text); if(!rows.length) return 0; var hd=rows[0].map(function(h){return h.trim().toLowerCase();}), ix=function(){ for(var i=0;i<arguments.length;i++){ var j=hd.indexOf(arguments[i]); if(j>=0) return j; } return -1; };
+  var N=ix('name','full name','guest','guest name','names'), FN=ix('first name','first'), LN=ix('last name','last','surname'), E=ix('email','e-mail'), P=ix('phone','phone number','mobile'), A=ix('address','mailing address'), G=ix('group'), M=ix('meal','meal choice'), R=ix('rsvp'), body=rows.slice(1);
+  if(N<0&&FN<0){ N=0; body=rows; }
+  var have={}, n=0; S.guests.forEach(function(g){ have[g.name.toLowerCase()]=1; });
+  body.forEach(function(r){ var nm=N>=0?(r[N]||'').trim():((r[FN]||'')+' '+(LN>=0?r[LN]||'':'')).trim(); if(!nm||have[nm.toLowerCase()]) return; have[nm.toLowerCase()]=1;
+    var rv=R>=0?String(r[R]||'').toLowerCase():''; S.guests.push(newGuest({name:nm,email:E>=0?(r[E]||'').trim():'',phone:P>=0?(r[P]||'').trim():'',address:A>=0?(r[A]||'').trim():'',group:G>=0?(r[G]||'').trim():'',meal:M>=0?(r[M]||'').trim():'',rsvp:/^y|attend|accept/.test(rv)?'Yes':/^n|declin/.test(rv)?'No':'Pending'})); n++; });
+  return n; }
+function mergeIn(o){ o=normalize(o); var gone={}, k; for(k in S.gone) gone[k]=S.gone[k]; for(k in o.gone) gone[k]=Math.max(gone[k]||0,o.gone[k]);
+  var added=0, remap={}, keyOf={tasks:'name',timeline:'what',pack:'name',guests:'name',tables:'name',party:'name',vendors:'name'};
+  ['tables','items','guests','tasks','vendors','timeline','party','pack'].forEach(function(c){ var mine=S[c], byId={}, byKey={}; mine.forEach(function(x,i){ byId[x.id]=i; if(keyOf[c]&&x[keyOf[c]]) byKey[String(x[keyOf[c]]).toLowerCase()]=i; });
+    (o[c]||[]).forEach(function(x){ if(c==='guests'&&x.table&&remap[x.table]) x.table=remap[x.table];
+      var i=byId[x.id]; if(i===undefined&&keyOf[c]&&x[keyOf[c]]) i=byKey[String(x[keyOf[c]]).toLowerCase()];
+      if(i===undefined){ if(!gone[x.id]){ mine.push(x); added++; } return; }
+      var keep=mine[i].id; if(c==='tables'&&keep!==x.id) remap[x.id]=keep;
+      if((x.u||0)>(mine[i].u||0)){ mine[i]=x; mine[i].id=keep; } });
+    S[c]=mine.filter(function(x){ return !gone[x.id]; }); });
+  if((o.su||0)>(S.su||0)){ ['p1','p2','date','venue','budget','cur','cats','guestGoal','su'].forEach(function(f){ if(o[f]!==undefined) S[f]=o[f]; }); }
+  var have={}; S.board.photos.forEach(function(p){ have[p.id]=1; }); o.board.photos.forEach(function(p){ if(!have[p.id]) S.board.photos.push(p); }); S.board.photos=S.board.photos.filter(function(p){ return !gone[p.id]; });
+  o.board.colors.forEach(function(c){ if(S.board.colors.indexOf(c)<0) S.board.colors.push(c); }); if((o.board.u||0)>(S.board.u||0)){ S.board.notes=o.board.notes; S.board.u=o.board.u; }
+  S.gone=gone; S.guests.forEach(function(g){ if(g.table&&!find('tables',g.table)) g.table=''; });
+  return added; }
+function download(name,text,type){ var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:type})); a.download=name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },500); }
+function guestCSV(){ var q=function(x){ x=String(x==null?'':x); return /[",\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x; };
+  return [['Name','Group','Side','RSVP','Meal','Table','Plus one','Save-the-date sent','Invitation sent','Phone','Email','Gift','Thank-you sent','Notes'].join(',')].concat(S.guests.map(function(g){ var t=g.table&&find('tables',g.table); return [g.name,g.group,g.side,g.rsvp,g.meal,t?t.name:'',g.plus?'Yes':'',g.std?'Yes':'',g.inv?'Yes':'',g.phone,g.email,g.gift,g.thanks?'Yes':'',g.notes].map(q).join(','); })).join('\n'); }
+document.getElementById('file').addEventListener('change',function(){ var f=this.files[0], mode=fileMode; fileMode=''; if(!f) return; var r=new FileReader(); r.onload=function(){ var text=String(r.result||'').replace(/^﻿/,'');
+  if(mode==='csv'){ var n=importGuests(text); save(); toast(n?n+' guests imported':'No new guests found in that file'); V.gf='all'; return go('guests'); }
+  try{ var d=JSON.parse(text); if(!d.tasks||!d.guests) throw 0;
+    if(mode==='merge'){ var n2=mergeIn(d); save(); toast('Joined. '+n2+' new '+(n2===1?'thing':'things')+' from your partner'); return go('home'); }
+    if(!confirm('Replace everything here with this backup?')) return; S=normalize(d); save(); toast('Backup restored'); go('home'); }catch(e){ toast('That file isn’t a Calm Wedding backup'); } }; r.readAsText(f); });
+document.getElementById('photo').addEventListener('change',function(){ var fs=[].slice.call(this.files||[]), room=30-S.board.photos.length; if(!fs.length) return; if(fs.length>room) toast('Room for '+room+' more photos'); fs=fs.slice(0,room); var left=fs.length;
+  fs.forEach(function(file){ shrink(file,function(src){ if(src) S.board.photos.push({id:uid(),src:src,u:Date.now()}); if(--left===0){ save(); render(); } }); }); });
+function shrink(file,cb){ var url=URL.createObjectURL(file), img=new Image(); img.onload=function(){ var m=720, s=Math.min(1,m/Math.max(img.width,img.height)), c=document.createElement('canvas'); c.width=Math.round(img.width*s); c.height=Math.round(img.height*s); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(url); cb(c.toDataURL('image/jpeg',0.72)); }; img.onerror=function(){ URL.revokeObjectURL(url); toast('One photo couldn’t be opened'); cb(null); }; img.src=url; }
+
+// listing photos only: demo?shot=home|tasks|guests|seating|budget|vendors|timeline&theme=dark
+var QP=new URLSearchParams(location.search);
+if(DEMO_MODE&&QP.get('shot')){ window.demoBar=function(){ return ''; }; if(QP.get('theme')) S.theme=QP.get('theme'); V.view=QP.get('shot'); }
+render();
+if(DEMO_MODE&&QP.get('scroll')) setTimeout(function(){ window.scrollTo(0,+QP.get('scroll')); },300);
+if(!store&&!DEMO_MODE) setTimeout(function(){ toast('Private mode: your plans won’t be saved'); },800);
+if('serviceWorker' in navigator && location.protocol.indexOf('http')===0) navigator.serviceWorker.register('sw.js').catch(function(){});
+</script>
+</body>
+</html>
